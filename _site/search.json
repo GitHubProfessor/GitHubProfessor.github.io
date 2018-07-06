@@ -1,0 +1,24 @@
+[
+  
+    {
+      "title"    : "Example content",
+      "tags"     : "",
+      "url"      : "/example/",
+      "date"     : "31 Jan 2017"
+    } ,
+  
+    {
+      "title"    : "Welcome to JAVA",
+      "tags"     : "",
+      "url"      : "/java/",
+      "date"     : "26 Jan 2017"
+    } ,
+  
+    {
+      "title"    : "Welcome to Jekyll!",
+      "tags"     : "",
+      "url"      : "/welcome-to-jekyll/",
+      "date"     : "26 Jan 2017"
+    } 
+  
+]
