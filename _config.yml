@@ -5,10 +5,10 @@ url: "http://mateussmedeiros.github.io/blade-theme/" # the base hostname & proto
 
 # Author settings
 author:
-  name     : Mateus Medeiros
+  name     : 梅利奥达斯
   bio      : Front End Developer passionate about new technologies. I am passionate about what I do and I try to learn more every day.
-  email    : mateus.sousamedeiros@gmail.com
-  twitter  : https://twitter.com/mateussousam
+  email    :
+  twitter  :
 
 #SEO settings
 logo: /assets/img/img-blog.png/ # Site logo URL
