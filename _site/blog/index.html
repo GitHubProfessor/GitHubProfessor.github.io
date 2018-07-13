@@ -142,7 +142,7 @@
       
         <li class="post-container"> 
 
-          <p> <a class="post-link" href="/java/">Java SE 静态和动态绑定</a> — Java中有两种类型的绑定（binding）： - 静态绑定（static binding）：在编译时进行 - 动态绑定（dynamic binding）：在执行时进行 那么什么是绑定呢？通过方法名对方法体的调用就是绑定。如果还有点晕，看下面的代码： class Human{ public int hight; public int weight; public void m (){ System.out.println("Human"); } } class Boy extends Human{ public String boyName; public void m(){ System.out.println("boy"); } public static void main(String[] args)... <a href="/java/"> Read more... </a> </p>
+          <p> <a class="post-link" href="/java/">Java SE 静态和动态绑定</a> — Java中有两种类型的绑定（binding）： - 静态绑定（static binding）：在编译时进行 - 动态绑定（dynamic binding）：在执行时进行 那么什么是绑定呢？就是一个方法的调用与方法所在的类(方法主体)关联起来。 说的再直白一些，就是子类集成父类，并重写了其中的方法，在实例化对象后，调用对象方法的时候，调用的是父类的还是子类的方法。 这个确定的过程就是绑定。那么是在什么时候确定下的呢？一种是在编译时就可以确定，一种是在运行时才能确定的。 这也就是所谓的静态绑定和动态绑定。如果还有点晕，看下面的代码对应理解上面的话： class Human{ public int hight; public int weight; public void speak (){ System.out.println("Human"); } } class Boy extends Human{ public String boyName; public void speak(){ System.out.println("boy"); } public static... <a href="/java/"> Read more... </a> </p>
 
         </li>
       

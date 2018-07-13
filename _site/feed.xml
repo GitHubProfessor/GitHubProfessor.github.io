@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-12T15:04:31+08:00</updated><id>http://localhost:4000//</id><title type="html">Blade Theme</title><subtitle>A simple Jekyll blog theme developed by Mateus Medeiros</subtitle><author><name>梅利奥达斯</name></author><entry><title type="html">Java SE 静态和动态绑定</title><link href="http://localhost:4000/java/" rel="alternate" type="text/html" title="Java SE 静态和动态绑定" /><published>2018-07-10T10:00:09+08:00</published><updated>2018-07-10T10:00:09+08:00</updated><id>http://localhost:4000/JavaSE-StaticAndDynamicBinding</id><content type="html" xml:base="http://localhost:4000/java/">&lt;p&gt;Java中有两种类型的绑定（binding）：
-- 静态绑定（static binding）：在编译时进行
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-13T13:53:47+08:00</updated><id>http://localhost:4000//</id><title type="html">Blade Theme</title><subtitle>A simple Jekyll blog theme developed by Mateus Medeiros</subtitle><author><name>梅利奥达斯</name></author><entry><title type="html">Java SE 静态和动态绑定</title><link href="http://localhost:4000/java/" rel="alternate" type="text/html" title="Java SE 静态和动态绑定" /><published>2018-07-10T10:00:09+08:00</published><updated>2018-07-10T10:00:09+08:00</updated><id>http://localhost:4000/JavaSE-StaticAndDynamicBinding</id><content type="html" xml:base="http://localhost:4000/java/">&lt;p&gt;Java中有两种类型的绑定（binding）：&lt;br /&gt;
+- 静态绑定（static binding）：在编译时进行&lt;br /&gt;
 - 动态绑定（dynamic binding）：在执行时进行&lt;/p&gt;
 
-&lt;p&gt;那么什么是绑定呢？通过方法名对方法体的调用就是绑定。如果还有点晕，看下面的代码：&lt;/p&gt;
+&lt;p&gt;那么什么是绑定呢？就是一个方法的调用与方法所在的类(方法主体)关联起来。&lt;br /&gt;
+说的再直白一些，就是子类集成父类，并重写了其中的方法，在实例化对象后，调用对象方法的时候，调用的是父类的还是子类的方法。
+这个确定的过程就是&lt;strong&gt;绑定&lt;/strong&gt;。那么是在什么时候确定下的呢？一种是在编译时就可以确定，一种是在运行时才能确定的。
+这也就是所谓的&lt;strong&gt;静态绑定&lt;/strong&gt;和&lt;strong&gt;动态绑定&lt;/strong&gt;。如果还有点晕，看下面的代码对应理解上面的话：&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
         &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
         
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;speak&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Human&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
@@ -16,32 +19,38 @@
     &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boyName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
         
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;speak&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
         
         &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//boy&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;speak&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//boy&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;代码中Human和Boy有个一个相同的方法名为m。但是相同的m方法各自有不同的方法体（花括号中的内容不同）。&lt;br /&gt;
-当执行h.m()时，调用哪个方法体呢？这就是绑定。是不是秒懂吧：）&lt;/p&gt;
+&lt;p&gt;代码中子类Boy继承了父类Human，并重写了speak方法，那么这时候当实例化时（Human h = new Boy();）
+就需要jvm进行绑定（时动态绑定还是静态绑定看下面内容）。来决定当执行h.speak()方法时，是调用Human的还是Boy的。&lt;br /&gt;
+这就是绑定。是不是秒懂吧：）&lt;/p&gt;
+
+&lt;p&gt;知道了什么是绑定，那么何为静态绑定，何为动态绑定呢？
+&amp;gt; 注意：绑定只是针对方法的。属性不存在绑定的概念（可以在父类和子类写一个相同的属性进行试验。）下文会给出例子。&lt;/p&gt;
 
 &lt;p&gt;下面我们就开始讲解&lt;a href=&quot;&quot;&gt;静态绑定&lt;/a&gt;和&lt;a href=&quot;&quot;&gt;动态绑定&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;静态绑定&lt;/h2&gt;
-&lt;p&gt;在编译时，就能确定方法名应该调用哪个具体的方法体。这就是静态绑定。&lt;br /&gt;
-方法如果有private，static，final修饰符，那么就是静态绑定。&lt;br /&gt;
-这些修饰符修饰的方法代码编译时期就会被绑定（如上面代码，编译时就可以确定调用m方法，最终是执行Human中的还是Boy中的）&lt;/p&gt;
 
-&lt;p&gt;这是为什么呢？这是因为被这些修饰符修饰的方法都不能被重写。所以在编译阶段就可以确定具体用的哪个方法体（子类和父类哪个类中方法）&lt;/p&gt;
+&lt;p&gt;在编译时，就能确定对象(h)调用的方法(h.speak()),应该调用父类(Human)的方法()speak())还是子类(Boy)的方法(speak())。这就是&lt;strong&gt;静态绑定&lt;/strong&gt;。&lt;br /&gt;
+   &lt;br /&gt;
+   那么问题来了，什么条件下在编译时就能确定呢？&lt;br /&gt;
+   答：如果方法名前有修饰符&lt;strong&gt;private&lt;/strong&gt;，&lt;strong&gt;static&lt;/strong&gt;，&lt;strong&gt;final&lt;/strong&gt;，那么在编译时就能确定调用的是父类(Human)还是子类(Boy)的方法speak()。&lt;br /&gt;
+       这是为什么呢？这是因为被这些修饰符修饰的方法都不能被重写。所以在编译阶段就可以确定具体用的哪个方法体（子类和父类哪个类中方法）&lt;/p&gt;
 
-&lt;p&gt;下面在来看一个例子（代码如下）：
-    假如有2各类Human和Boy，两个类都拥有相同的方法wolk()，并且这两个方法都是static，这就意味着这个方法不能被重写，因为尽管
-     Human obj = new Boy();但是最后还是会调用Human的walk()方法。因为obj是Human类型（父类）。所以，当绑定（调用）一个static，final，private
-     修饰的方法时，编译器在编译时就能决定调用的是哪个类中的方法。&lt;/p&gt;
+&lt;p&gt;下面在来看一个例子：
+       假如有2各类Human和Boy，两个类都拥有相同的方法walk()，这两个方法都用static修饰，这就意味着这个方法不能被重写，所以就会在编译时就会确定
+       Human obj = new Boy()后，执行obj.walk()方法时，调用的是Human的walk()方法。因为obj是Human类型（父类）。&lt;/p&gt;
+
+&lt;p&gt;代码如下：&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
@@ -75,13 +84,14 @@
 
 &lt;h2 id=&quot;section-1&quot;&gt;动态绑定&lt;/h2&gt;
 
-&lt;p&gt;当编译器无法再编译时确定调用/绑定哪个类的方法，那么就被称作动态绑定。
-方法重写是动态绑定的一个很好的例子。
-当子类重写父类的方法时，对象的类型决定了调用哪个类的方法（也就是说主要看=号右边new的是哪个类）。这个类型是在运行时才被决定的，因此也被称为动态绑定&lt;/p&gt;
+&lt;p&gt;当编译器无法在编译时确定调用/绑定哪个类的方法，那么就被称作动态绑定。
+方法重写是动态绑定的一个很好的例子。当子类重写父类的方法时， 只有在运行时，才能确定对象(h)调用的方法(h.speak()),应该调用父类(Human)的方法()speak())还是子类(Boy)的方法(speak())。&lt;/p&gt;
 
-&lt;p&gt;动态绑定的例子：
+&lt;p&gt;对象的类型决定了调用哪个类的方法（也就是说主要看=号右边new的是哪个类）。这个类型是在运行时才被决定的，所以方法重载属于动态绑定&lt;/p&gt;
+
+&lt;p&gt;再举一个动态绑定的例子：
 同样还是Human和Boy两个类，不同的是，这两个类中不在使用static，private或者final修饰符修饰方法，
-在重写的情况下，通过对象类型在运行时确定对重写方法的调用，从而发生后期绑定。代码如下：&lt;/p&gt;
+在方法重写的情况下，通过对象类型在运行时确定对重写方法的调用，从而发生后期绑定。代码如下：&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
        &lt;span class=&quot;c1&quot;&gt;//Overridden Method&lt;/span&gt;
@@ -90,11 +100,13 @@
            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Human walks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
     &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Demo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
        &lt;span class=&quot;c1&quot;&gt;//Overriding Method&lt;/span&gt;
        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Boy walks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+       
        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
            &lt;span class=&quot;cm&quot;&gt;/* Reference is of Human type and object is
             * Boy type
@@ -122,7 +134,41 @@
 3.重载是静态绑定，重写是动态绑定。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;总结&lt;/h2&gt;
-&lt;p&gt;1.方法前面如果有static，private，final之一，那么便是静态绑定，此种情况下，等号左边的引用是什么类型，那么就会调用这个类的方法。&lt;/p&gt;
+&lt;p&gt;1.方法前面如果有static，private，final之一，那么便是静态绑定，此种情况下，等号左边的引用是什么类型，那么就会调用这个类的方法。&lt;br /&gt;
+2.方法重写是动态绑定的一个体现&lt;br /&gt;
+3.属性不会被绑定。例子如下：&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Human walks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;talk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Human talk&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Boy walks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;talk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Human talk&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+           
+            &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Human&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;https://beginnersbook.com/2013/04/java-static-dynamic-binding/&lt;/p&gt;</content><author><name>梅利奥达斯</name></author><summary type="html">Java中有两种类型的绑定（binding）：
 - 静态绑定（static binding）：在编译时进行

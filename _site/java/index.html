@@ -141,17 +141,20 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Java中有两种类型的绑定（binding）：
-- 静态绑定（static binding）：在编译时进行
+    <p>Java中有两种类型的绑定（binding）：<br />
+- 静态绑定（static binding）：在编译时进行<br />
 - 动态绑定（dynamic binding）：在执行时进行</p>
 
-<p>那么什么是绑定呢？通过方法名对方法体的调用就是绑定。如果还有点晕，看下面的代码：</p>
+<p>那么什么是绑定呢？就是一个方法的调用与方法所在的类(方法主体)关联起来。<br />
+说的再直白一些，就是子类集成父类，并重写了其中的方法，在实例化对象后，调用对象方法的时候，调用的是父类的还是子类的方法。
+这个确定的过程就是<strong>绑定</strong>。那么是在什么时候确定下的呢？一种是在编译时就可以确定，一种是在运行时才能确定的。
+这也就是所谓的<strong>静态绑定</strong>和<strong>动态绑定</strong>。如果还有点晕，看下面的代码对应理解上面的话：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java">    <span class="kd">class</span> <span class="nc">Human</span><span class="o">{</span>
         <span class="kd">public</span> <span class="kt">int</span> <span class="n">hight</span><span class="o">;</span>
         <span class="kd">public</span> <span class="kt">int</span> <span class="n">weight</span><span class="o">;</span>
         
-        <span class="kd">public</span> <span class="kt">void</span> <span class="n">m</span> <span class="o">(){</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">speak</span> <span class="o">(){</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Human"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -159,32 +162,38 @@
     <span class="kd">class</span> <span class="nc">Boy</span> <span class="kd">extends</span> <span class="n">Human</span><span class="o">{</span>
         <span class="kd">public</span> <span class="n">String</span> <span class="n">boyName</span><span class="o">;</span>
         
-        <span class="kd">public</span> <span class="kt">void</span> <span class="n">m</span><span class="o">(){</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">speak</span><span class="o">(){</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"boy"</span><span class="o">);</span>
         <span class="o">}</span>
         
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">Human</span> <span class="n">h</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Boy</span><span class="o">();</span>
-            <span class="n">h</span><span class="o">.</span><span class="na">m</span><span class="o">();</span> <span class="c1">//boy</span>
+            <span class="n">h</span><span class="o">.</span><span class="na">speak</span><span class="o">();</span> <span class="c1">//boy</span>
         <span class="o">}</span>
     <span class="o">}</span></code></pre></figure>
 
-<p>代码中Human和Boy有个一个相同的方法名为m。但是相同的m方法各自有不同的方法体（花括号中的内容不同）。<br />
-当执行h.m()时，调用哪个方法体呢？这就是绑定。是不是秒懂吧：）</p>
+<p>代码中子类Boy继承了父类Human，并重写了speak方法，那么这时候当实例化时（Human h = new Boy();）
+就需要jvm进行绑定（时动态绑定还是静态绑定看下面内容）。来决定当执行h.speak()方法时，是调用Human的还是Boy的。<br />
+这就是绑定。是不是秒懂吧：）</p>
+
+<p>知道了什么是绑定，那么何为静态绑定，何为动态绑定呢？
+&gt; 注意：绑定只是针对方法的。属性不存在绑定的概念（可以在父类和子类写一个相同的属性进行试验。）下文会给出例子。</p>
 
 <p>下面我们就开始讲解<a href="">静态绑定</a>和<a href="">动态绑定</a></p>
 
 <h2 id="section">静态绑定</h2>
-<p>在编译时，就能确定方法名应该调用哪个具体的方法体。这就是静态绑定。<br />
-方法如果有private，static，final修饰符，那么就是静态绑定。<br />
-这些修饰符修饰的方法代码编译时期就会被绑定（如上面代码，编译时就可以确定调用m方法，最终是执行Human中的还是Boy中的）</p>
 
-<p>这是为什么呢？这是因为被这些修饰符修饰的方法都不能被重写。所以在编译阶段就可以确定具体用的哪个方法体（子类和父类哪个类中方法）</p>
+<p>在编译时，就能确定对象(h)调用的方法(h.speak()),应该调用父类(Human)的方法()speak())还是子类(Boy)的方法(speak())。这就是<strong>静态绑定</strong>。<br />
+   <br />
+   那么问题来了，什么条件下在编译时就能确定呢？<br />
+   答：如果方法名前有修饰符<strong>private</strong>，<strong>static</strong>，<strong>final</strong>，那么在编译时就能确定调用的是父类(Human)还是子类(Boy)的方法speak()。<br />
+       这是为什么呢？这是因为被这些修饰符修饰的方法都不能被重写。所以在编译阶段就可以确定具体用的哪个方法体（子类和父类哪个类中方法）</p>
 
-<p>下面在来看一个例子（代码如下）：
-    假如有2各类Human和Boy，两个类都拥有相同的方法wolk()，并且这两个方法都是static，这就意味着这个方法不能被重写，因为尽管
-     Human obj = new Boy();但是最后还是会调用Human的walk()方法。因为obj是Human类型（父类）。所以，当绑定（调用）一个static，final，private
-     修饰的方法时，编译器在编译时就能决定调用的是哪个类中的方法。</p>
+<p>下面在来看一个例子：
+       假如有2各类Human和Boy，两个类都拥有相同的方法walk()，这两个方法都用static修饰，这就意味着这个方法不能被重写，所以就会在编译时就会确定
+       Human obj = new Boy()后，执行obj.walk()方法时，调用的是Human的walk()方法。因为obj是Human类型（父类）。</p>
+
+<p>代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java">    <span class="kd">class</span> <span class="nc">Human</span><span class="o">{</span>
        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">walk</span><span class="o">()</span>
@@ -218,13 +227,14 @@
 
 <h2 id="section-1">动态绑定</h2>
 
-<p>当编译器无法再编译时确定调用/绑定哪个类的方法，那么就被称作动态绑定。
-方法重写是动态绑定的一个很好的例子。
-当子类重写父类的方法时，对象的类型决定了调用哪个类的方法（也就是说主要看=号右边new的是哪个类）。这个类型是在运行时才被决定的，因此也被称为动态绑定</p>
+<p>当编译器无法在编译时确定调用/绑定哪个类的方法，那么就被称作动态绑定。
+方法重写是动态绑定的一个很好的例子。当子类重写父类的方法时， 只有在运行时，才能确定对象(h)调用的方法(h.speak()),应该调用父类(Human)的方法()speak())还是子类(Boy)的方法(speak())。</p>
 
-<p>动态绑定的例子：
+<p>对象的类型决定了调用哪个类的方法（也就是说主要看=号右边new的是哪个类）。这个类型是在运行时才被决定的，所以方法重载属于动态绑定</p>
+
+<p>再举一个动态绑定的例子：
 同样还是Human和Boy两个类，不同的是，这两个类中不在使用static，private或者final修饰符修饰方法，
-在重写的情况下，通过对象类型在运行时确定对重写方法的调用，从而发生后期绑定。代码如下：</p>
+在方法重写的情况下，通过对象类型在运行时确定对重写方法的调用，从而发生后期绑定。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java">    <span class="kd">class</span> <span class="nc">Human</span><span class="o">{</span>
        <span class="c1">//Overridden Method</span>
@@ -233,11 +243,13 @@
            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Human walks"</span><span class="o">);</span>
        <span class="o">}</span>
     <span class="o">}</span>
+    
     <span class="kd">class</span> <span class="nc">Demo</span> <span class="kd">extends</span> <span class="n">Human</span><span class="o">{</span>
        <span class="c1">//Overriding Method</span>
        <span class="kd">public</span> <span class="kt">void</span> <span class="n">walk</span><span class="o">(){</span>
            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Boy walks"</span><span class="o">);</span>
        <span class="o">}</span>
+       
        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span> <span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
            <span class="cm">/* Reference is of Human type and object is
             * Boy type
@@ -265,7 +277,41 @@
 3.重载是静态绑定，重写是动态绑定。</p>
 
 <h2 id="section-3">总结</h2>
-<p>1.方法前面如果有static，private，final之一，那么便是静态绑定，此种情况下，等号左边的引用是什么类型，那么就会调用这个类的方法。</p>
+<p>1.方法前面如果有static，private，final之一，那么便是静态绑定，此种情况下，等号左边的引用是什么类型，那么就会调用这个类的方法。<br />
+2.方法重写是动态绑定的一个体现<br />
+3.属性不会被绑定。例子如下：<br /></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">    <span class="kd">class</span> <span class="nc">Human</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">walk</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Human walks"</span><span class="o">);</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">talk</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Human talk"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">class</span> <span class="nc">Boy</span> <span class="kd">extends</span> <span class="n">Human</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">walk</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Boy walks"</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">talk</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Human talk"</span><span class="o">);</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+           
+            <span class="n">Human</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Boy</span><span class="o">();</span>
+            <span class="n">Human</span> <span class="n">obj2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="o">();</span>
+            
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">x</span><span class="o">);</span> <span class="c1">// 0</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">obj2</span><span class="o">.</span><span class="na">x</span><span class="o">);</span><span class="c1">// 0</span>
+        <span class="o">}</span>
+    <span class="o">}</span></code></pre></figure>
 
 <p>https://beginnersbook.com/2013/04/java-static-dynamic-binding/</p>
 
