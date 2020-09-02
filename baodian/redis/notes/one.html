@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redis 面试题 | Bug_more_more的blog</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="https://open.weixin.qq.com/qr/code?username=a_javaboy">
+    <meta name="description" content="有bug才有天下">
+    <link rel="preload" href="/assets/css/0.styles.7950d16d.css" as="style"><link rel="preload" href="/assets/js/app.c2ba3d38.js" as="script"><link rel="preload" href="/assets/js/2.be311ca5.js" as="script"><link rel="preload" href="/assets/js/7.d77fabf3.js" as="script"><link rel="prefetch" href="/assets/js/10.7f181215.js"><link rel="prefetch" href="/assets/js/11.5b7afc3e.js"><link rel="prefetch" href="/assets/js/12.3863b532.js"><link rel="prefetch" href="/assets/js/13.6453bad3.js"><link rel="prefetch" href="/assets/js/14.55dea391.js"><link rel="prefetch" href="/assets/js/3.8099ba9f.js"><link rel="prefetch" href="/assets/js/4.1cfc2f80.js"><link rel="prefetch" href="/assets/js/5.8f5a74a9.js"><link rel="prefetch" href="/assets/js/6.2ae75c0b.js"><link rel="prefetch" href="/assets/js/8.0d8e04db.js"><link rel="prefetch" href="/assets/js/9.13d733a8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7950d16d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="https://open.weixin.qq.com/qr/code?username=a_javaboy" alt="Bug_more_more的blog" class="logo"> <span class="site-name can-hide">Bug_more_more的blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link">
+  懵逼指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试宝典" class="dropdown-title"><span class="title">面试宝典</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试宝典" class="mobile-dropdown-title"><span class="title">面试宝典</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/baodian/redis/" class="nav-link router-link-active">
+  redis篇
+</a></li><li class="dropdown-item"><!----> <a href="/baodian/spring/" class="nav-link">
+  高级开发篇
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link">
+  懵逼指南
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试宝典" class="dropdown-title"><span class="title">面试宝典</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试宝典" class="mobile-dropdown-title"><span class="title">面试宝典</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/baodian/redis/" class="nav-link router-link-active">
+  redis篇
+</a></li><li class="dropdown-item"><!----> <a href="/baodian/spring/" class="nav-link">
+  高级开发篇
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>redis面试宝典</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/baodian/redis/notes/one.html" aria-current="page" class="active sidebar-link">Redis 面试题</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="redis-面试题"><a href="#redis-面试题" class="header-anchor">#</a> Redis 面试题</h1> <h5 id="_1-核心数据结构有哪些-string类型都有哪些特点"><a href="#_1-核心数据结构有哪些-string类型都有哪些特点" class="header-anchor">#</a> 1.核心数据结构有哪些？String类型都有哪些特点？</h5> <ul><li>String：字符串类型<div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; set name john
+OK
+&gt; get name
+&quot;john&quot;
+&gt; set name1 1.3
+OK
+&gt; get name1
+&quot;1.3&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></li> <li>List：列表类型<div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; LPUSH mylist &quot;world&quot;
+(integer) 1
+&gt; LPUSH mylist &quot;hello&quot;
+(integer) 2
+&gt; LRANGE mylist 0 -1
+1) &quot;hello&quot;
+2) &quot;world&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></li> <li>Set：无序集合类型<div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; sadd names xiaoming
+(integer) 1
+&gt; sadd names xiaohong
+(integer) 1
+&gt; smembers names
+1) &quot;xiaohong&quot;
+2) &quot;xiaoming&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></li> <li>ZSet：有序集合类型<div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; zadd languages 1 redis
+(integer) 1
+&gt; zadd languages 2 mongodb
+(integer) 1
+&gt; zadd languages 3 mysql
+(integer) 1
+&gt; zadd languages 4 mysql
+(integer) 0
+&gt; zrange languages 0 -1 withscores
+1) &quot;redis&quot;
+2) 1.0
+3) &quot;mongodb&quot;
+4) 2.0
+5) &quot;mysql&quot;
+6) 4.0
+&gt; zrange languages 0 -1
+1) &quot;redis&quot;
+2) &quot;mongodb&quot;
+3) &quot;mysql&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div></li> <li>Hash：哈希表类型<div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; hset myhash key1 value1
+(integer) 1
+&gt; hset myhash key2 value2
+(integer) 1
+&gt; hgetall myhash
+1) &quot;key1&quot;
+2) &quot;value1&quot;
+3) &quot;key2&quot;
+4) &quot;value2&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></li></ul> <h5 id="_2-值类型中hash和string有什么区别-实际工作中如何选择"><a href="#_2-值类型中hash和string有什么区别-实际工作中如何选择" class="header-anchor">#</a> 2.值类型中hash和string有什么区别？实际工作中如何选择？</h5> <span style="color:#9e9e9e;font-size:9px;">
+Redis hash 是一个 string 类型的 field 和 value 的 映射表。它的添加、删除操作都是 0(1)（平均操作）。<br> 
+hash特别适合用于存储对象。相较于将对象的每个字段存成单个 string 类型（string 类型可以存储对象序列化）。 
+将一个对象存储在 hash 类型中会占用更少的内存，并且可以更方便的存取整个对象。 
+（省内存的原因是新建一个 hash 对象时开始是用 zipmap（又称为 small hash）来存储的。 
+这个 zipmap 其实并不是 hash table，但是 zipmap 相比正常的 hash 实现可以节省不少 hash 本身需要的一些元数据存储开销。
+</span> <h5 id="_3-持久化是如何工作的-redis在持久化过程中可以对外服务么"><a href="#_3-持久化是如何工作的-redis在持久化过程中可以对外服务么" class="header-anchor">#</a> 3.持久化是如何工作的？Redis在持久化过程中可以对外服务么？</h5> <span style="color:#9e9e9e;font-size:9px;">
+我们都知道，redis是基于内存的K-V数据库。由于内存是断电易失的，所以redis提供了相应的持久化机制<br>
+持久化有两种方式：<br>
+1.rdb<br>
+2.aof<br>
+redis在持久化的过程中是可以对外服务的。
+</span> <h5 id="_4-持久化方式rdb和aof的原理和优缺点"><a href="#_4-持久化方式rdb和aof的原理和优缺点" class="header-anchor">#</a> 4.持久化方式rdb和aof的原理和优缺点</h5> <h5 id="_5-内存不足时-如何处理新的请求"><a href="#_5-内存不足时-如何处理新的请求" class="header-anchor">#</a> 5.内存不足时，如何处理新的请求</h5> <h5 id="_6-如何处理过期数据的"><a href="#_6-如何处理过期数据的" class="header-anchor">#</a> 6.如何处理过期数据的？</h5> <h5 id="_7-内存淘汰算法-lru-lfu可以讲一下原理么"><a href="#_7-内存淘汰算法-lru-lfu可以讲一下原理么" class="header-anchor">#</a> 7.内存淘汰算法 LRU/LFU可以讲一下原理么？</h5> <h5 id="_8-有序数据结构zset底层原理"><a href="#_8-有序数据结构zset底层原理" class="header-anchor">#</a> 8.有序数据结构zset底层原理？</h5> <h5 id="_9-位图应用场景以及实现原理"><a href="#_9-位图应用场景以及实现原理" class="header-anchor">#</a> 9.位图应用场景以及实现原理？</h5> <h5 id="_10-缓存穿透-缓存雪崩-缓存重建"><a href="#_10-缓存穿透-缓存雪崩-缓存重建" class="header-anchor">#</a> 10.缓存穿透/缓存雪崩/缓存重建？</h5> <h5 id="_11-集群分片原理是怎样的"><a href="#_11-集群分片原理是怎样的" class="header-anchor">#</a> 11.集群分片原理是怎样的？</h5> <h5 id="_12-单线程和redis6-0多线程是如何工作的"><a href="#_12-单线程和redis6-0多线程是如何工作的" class="header-anchor">#</a> 12.单线程和Redis6.0多线程是如何工作的？</h5></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.c2ba3d38.js" defer></script><script src="/assets/js/2.be311ca5.js" defer></script><script src="/assets/js/7.d77fabf3.js" defer></script>
+  </body>
+</html>
